@@ -20,6 +20,44 @@
                 </span>
             </b>
         </p>
+
+        <p>Click the rectangle!</p>
+
+        <canvas id="myCanvas">
+            Your browser does not support the canvas tag. <!-- Fallback content -->
+        </canvas>
+            
+        <script>
+    
+            // Get the canvas element and context
+            let canvas = document.getElementById("myCanvas");
+            let ctx = canvas.getContext("2d");
+    
+            // Draw the rectangle
+            ctx.fillStyle = "#FF0000";
+            ctx.fillRect(0, 0, 80, 80);
+    
+            // Function to check if a click is inside the rectangle
+            function isClickInsideRect(clickX, clickY, rectX, rectY, rectWidth, rectHeight) {
+                return clickX >= rectX && clickX <= rectX + rectWidth && clickY >= rectY && clickY <= rectY + rectHeight;
+            }
+    
+            // Add click event listener to the canvas
+            canvas.addEventListener('click', function(event) {
+                // Get click position relative to the canvas
+                let rect = canvas.getBoundingClientRect();
+                let x = event.clientX - rect.left;
+                let y = event.clientY - rect.top;
+    
+                // Check if the click is inside the rectangle
+                if (isClickInsideRect(x, y, 0, 0, 80, 80)) {
+                    // Click was inside the rectangle, perform your action here
+                    window.location.href = "./test.html";
+                    console.log('Rectangle was clicked, went to new link');
+                }
+            });
+    
+        </script>
     </body>
 
 </html>
